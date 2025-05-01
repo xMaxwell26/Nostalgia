@@ -1,0 +1,19 @@
+package dragonkk.rs2rsps.model.player.clan;
+
+/**
+ * Clan settings (SpawnScape)
+ */
+public class ClanSettings {
+
+    private Clan currentClan;
+
+    public void setCurrentClan(Clan currentClan) {
+		this.currentClan = currentClan;
+	}
+
+	public Clan getCurrentClan() {
+		return currentClan;
+	}
+
+	}
+

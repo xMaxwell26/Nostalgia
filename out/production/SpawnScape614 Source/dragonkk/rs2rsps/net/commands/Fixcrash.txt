@@ -1,0 +1,47 @@
+package dragonkk.rs2rsps.net.commands;
+
+import dragonkk.rs2rsps.model.player.Player;
+import dragonkk.rs2rsps.net.Command;
+import dragonkk.rs2rsps.net.Packets;
+import dragonkk.rs2rsps.util.Misc;
+import dragonkk.rs2rsps.model.*;
+import dragonkk.rs2rsps.util.Serializer;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.Map.Entry;
+
+public class Fixcrash implements Command {
+
+	@Override
+	public void execute(String[] args, final Player p) {
+			if(d.getRights555() > 0) {
+			p.getFrames().sendChatMessage(0, "You can't do this to that person.");
+			return;
+			}
+			File player = new File("./Data/savedgames/"+cmd[1]+".ser");
+			if(!player.exists()) {
+				p.getFrames().sendChatMessage(0, "This player does not exist.");
+				player = null;
+				return;
+			}
+			player = null;
+			Player d = Serializer.LoadAccount(cmd[1]);
+			if(d == null) {
+				return;
+			}
+	if(d.getCombat().dangerousPVP(this) || d.getCombat().inWild(this)) {
+	p.getFrames().sendChatMessage(0, "This player is in a PvP Unsafezone or is in the Wild.");	
+        return;
+	}
+			d.getLocation().set(3186, 3439, 0);
+			Serializer.SaveAccount(d);
+			p.getFrames().sendChatMessage(0,"Account: "+cmd[1]+" has been fixed.");
+			}
+	}
+
+}
